@@ -27,6 +27,29 @@ export async function POST(requst: NextRequest) {
         { status: 400 }
       );
     }
+
+    const tokenPayload = {
+      id: user._id,
+      username: user.username,
+      email: user.email,
+    };
+
+    const token = await jwt.sign(
+      tokenPayload,
+      process.env.TOKEN_SECRET as string,
+      { expiresIn: "1d" }
+    );
+
+    const response = NextResponse.json({
+      message: "Looged in Success",
+      success: true,
+    });
+
+    response.cookies.set("token", token, {
+      httpOnly: true,
+    });
+
+    return response;
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
