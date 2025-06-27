@@ -1,20 +1,25 @@
 import mongoose from "mongoose";
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: [true, "Please Provide a User Name"],
+    required: [true, "Please provide a username"],
+    unique: true,
   },
   email: {
     type: String,
-    required: [true, "Please Provide an Email"],
+    required: [true, "Please provide a email"],
     unique: true,
   },
   password: {
     type: String,
-    required: [true, "Please Provide password"],
-    unique: true,
+    required: [true, "Please provide a password"],
   },
-  isVerified: {
+  isVerfied: {
+    type: Boolean,
+    default: false,
+  },
+  isAdmin: {
     type: Boolean,
     default: false,
   },
@@ -24,6 +29,6 @@ const userSchema = new mongoose.Schema({
   verifyTokenExpiry: Date,
 });
 
-const User = mongoose.models["users"] || mongoose.model("users", userSchema); //special case in next js you gotta check for the model if it is created then just use it or else create it , and yes do not forget to put the name as "users" the plural part is important as well
+const User = mongoose.models.users || mongoose.model("users", userSchema);
 
 export default User;
