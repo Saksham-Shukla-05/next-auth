@@ -5,10 +5,10 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 connect();
 
-export async function POST(requst: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
-    const { username, email, password } = reqBody;
+    const { email, password } = reqBody;
 
     const user = await User.findOne({ email });
 

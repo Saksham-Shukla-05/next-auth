@@ -15,6 +15,6 @@ export async function POST(requst: NextRequest) {
   if (!user) {
     return NextResponse.json({ error: "Invalid Token" }, { status: 500 });
   } else {
-    return NextResponse.json({ error: "User Found", data: user });
+    return NextResponse.json({ message: "User Found", data: user });
   }
 }
